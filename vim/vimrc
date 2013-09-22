@@ -1,34 +1,53 @@
-set nocompatible
-filetype off
-syntax on
-set t_Co=256
-set autoindent
-set number
-set tabstop=2
-set softtabstop=2
-set mouse=a
-set showcmd
-set history=1000
-let g:airline_powerline_fonts = 1
-set laststatus=2 " this is for vim-airline
-colorscheme slate
-
-highlight ExtraWhitespace ctermbg=darkyellow guibg=darkyellow
-match ExtraWhitespace /\s\+$/
-
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-Bundle 'scrooloose/nerdtree'
 Bundle 'bling/vim-airline'
-Bundle 'tpope/vim-rails'
+Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'chriskempson/tomorrow-theme', { 'rtp': 'vim/' }
 Bundle 'ervandew/supertab'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
+Bundle 'nono/vim-handlebars'
+Bundle 'pangloss/vim-javascript'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'skwp/vim-rspec'
+Bundle 'slim-template/vim-slim'
+Bundle 'sunaku/vim-ruby-minitest'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-surround'
+Bundle 'vim-ruby/vim-ruby'
 
-" shortcuts
+set nocompatible
+set t_Co=256
+filetype off
+syntax on
+set autoindent
+set expandtab
+set history=1000
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch
+set list listchars=tab:»·,trail:· " detect trailing whitespace
+set mouse=a
+set number
+set shiftwidth=2
+set showcmd
+set softtabstop=2
+set tabstop=2
+let g:airline_powerline_fonts = 1
+set laststatus=2 " this is for vim-airline
+colorscheme Tomorrow-Night-Bright
 
 let mapleader = ','
 let g:mapleader = ','
@@ -36,7 +55,14 @@ inoremap ;a <Esc>
 inoremap ;d <Esc>:update<Cr>
 inoremap ;f <C-O>:update<Cr>
 nnoremap ;f :update<CR>
-nnoremap <leader>c :set cursorline!<CR>
+" Quick moves to splits and tab
+nnoremap <leader>e :e <C-R>=expand('%:h').'/'<cr>
+nnoremap <leader>s :sp <C-R>=expand('%:h').'/'<cr>
+nnoremap <leader>v :vsp <C-R>=expand('%:h').'/'<cr>
+nnoremap <leader>t :tabe <C-R>=expand('%:h').'/'<cr>
+
+" GOTCHA IN MY CROSSHAIRS
+nnoremap <leader>/ :set cursorline! cursorcolumn!<CR>
 
 nmap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 let g:SuperTabDefaultCompletionType = "<c-n>"
