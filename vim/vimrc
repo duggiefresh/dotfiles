@@ -1,0 +1,43 @@
+" asdfsadfasdf
+set nocompatible
+filetype off
+syntax on
+set t_Co=256
+set autoindent
+set number
+set tabstop=2
+set softtabstop=2
+set mouse=a
+set showcmd
+set history=1000
+let g:airline_powerline_fonts = 1
+set laststatus=2 " this is for vim-airline
+colorscheme slate
+
+highlight ExtraWhitespace ctermbg=darkyellow guibg=darkyellow
+match ExtraWhitespace /\s\+$/
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+Bundle 'scrooloose/nerdtree'
+Bundle 'bling/vim-airline'
+Bundle 'tpope/vim-rails'
+Bundle 'ervandew/supertab'
+Bundle 'mileszs/ack.vim'
+
+" shortcuts
+
+let mapleader = ','
+let g:mapleader = ','
+inoremap ;a <Esc>
+inoremap ;d <Esc>:update<Cr>
+inoremap ;f <C-O>:update<Cr>
+nnoremap ;f :update<CR>
+nnoremap <leader>c :set cursorline!<CR>
+
+nmap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
+let g:SuperTabDefaultCompletionType = "<c-n>"
