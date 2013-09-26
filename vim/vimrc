@@ -52,22 +52,24 @@ colorscheme Tomorrow-Night-Bright
 
 let mapleader = ','
 let g:mapleader = ','
-inoremap ;a <Esc>
-inoremap ;d <Esc>:update<Cr>
-inoremap ;f <C-O>:update<Cr>
+inoremap ;a <ESC>
+inoremap ;d <ESC>:update<CR>
+inoremap ;f <C-O>:update<CR>
 nnoremap ;f :update<CR>
 " Quick moves to splits and tab
-nnoremap <leader>e :e <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>s :sp <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>v :vsp <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>t :tabe <C-R>=expand('%:h').'/'<cr>
+nnoremap <leader>e :e <C-R>=expand('%:h').'/'<CR>
+nnoremap <leader>s :sp <C-R>=expand('%:h').'/'<CR>
+nnoremap <leader>v :vsp <C-R>=expand('%:h').'/'<CR>
+nnoremap <leader>t :tabe <C-R>=expand('%:h').'/'<CR>
 " Use CTRL to move lines up and down
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
+inoremap <C-j> <ESC>:m .+1<CR>==gi
+inoremap <C-k> <ESC>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+" Toggle highlight
+noremap <leader>h :noh<CR>
 
 " GOTCHA IN MY CROSSHAIRS
 nnoremap <leader>/ :set cursorline!<CR>
