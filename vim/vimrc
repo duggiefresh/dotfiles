@@ -41,6 +41,7 @@ set incsearch
 set list listchars=tab:»·,trail:· " detect trailing whitespace
 set mouse=a
 set number
+set cursorline
 set shiftwidth=2
 set showcmd
 set softtabstop=2
