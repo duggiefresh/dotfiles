@@ -8,8 +8,10 @@ Bundle 'bling/vim-airline'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'chriskempson/tomorrow-theme', { 'rtp': 'vim/' }
 Bundle 'ervandew/supertab'
+Bundle "garbas/vim-snipmate"
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
+Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle 'mileszs/ack.vim'
 Bundle 'nono/vim-handlebars'
 Bundle 'pangloss/vim-javascript'
@@ -19,6 +21,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'skwp/vim-rspec'
 Bundle 'slim-template/vim-slim'
 Bundle 'sunaku/vim-ruby-minitest'
+Bundle "tomtom/tlib_vim"
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-haml'
@@ -48,6 +51,9 @@ set softtabstop=2
 set tabstop=2
 let g:airline_powerline_fonts = 1
 set laststatus=2 " this is for vim-airline
+" Sets a timeout limit, used to kill the lag between deleting and top insert: O
+set timeout timeoutlen=1000 ttimeoutlen=100
+set backspace=indent,eol,start
 colorscheme Tomorrow-Night-Bright
 
 let mapleader = ','
