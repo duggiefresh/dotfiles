@@ -15,6 +15,7 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle 'mileszs/ack.vim'
 Bundle 'nono/vim-handlebars'
 Bundle 'pangloss/vim-javascript'
+Bundle 'rking/ag.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
