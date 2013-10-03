@@ -55,6 +55,7 @@ set laststatus=2 " this is for vim-airline
 " Sets a timeout limit, used to kill the lag between deleting and top insert: O
 set timeout timeoutlen=1000 ttimeoutlen=100
 set backspace=indent,eol,start
+set pastetoggle=<F7>
 colorscheme Tomorrow-Night-Bright
 
 let mapleader = ','
