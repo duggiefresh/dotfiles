@@ -1,3 +1,4 @@
+filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -31,9 +32,9 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-ruby/vim-ruby'
 
+filetype plugin indent on
 set nocompatible
 set t_Co=256
-filetype off
 syntax on
 set autoindent
 set expandtab
