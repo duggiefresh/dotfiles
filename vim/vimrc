@@ -57,7 +57,6 @@ set laststatus=2 " this is for vim-airline
 set timeout timeoutlen=1000 ttimeoutlen=100
 set backspace=indent,eol,start
 set pastetoggle=<F7>
-colorscheme Tomorrow-Night-Bright
 
 let mapleader = ','
 let g:mapleader = ','
@@ -86,3 +85,9 @@ nnoremap <leader>\ :set cursorcolumn!<CR>
 
 nmap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+if strftime("%H") < 18
+  colorscheme Tomorrow
+else
+  colorscheme Tomorrow-Night-Bright
+endif
