@@ -8,6 +8,7 @@ Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'chriskempson/tomorrow-theme', { 'rtp': 'vim/' }
+Bundle 'duggiefresh/vim-colors'
 Bundle 'ervandew/supertab'
 Bundle "garbas/vim-snipmate"
 Bundle 'kchmck/vim-coffee-script'
@@ -33,6 +34,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'vim-ruby/vim-ruby'
 
 filetype plugin indent on
+colors slummerville
 set nocompatible
 set t_Co=256
 syntax on
@@ -52,6 +54,7 @@ set showcmd
 set softtabstop=2
 set tabstop=2
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'bubblegum'
 set laststatus=2 " this is for vim-airline
 " Sets a timeout limit, used to kill the lag between deleting and top insert: O
 set timeout timeoutlen=1000 ttimeoutlen=100
@@ -85,9 +88,10 @@ nnoremap <leader>\ :set cursorcolumn!<CR>
 
 nmap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:NERDSpaceDelims = 1
 
 if strftime("%H") < 18
   colorscheme Tomorrow
 else
-  colorscheme Tomorrow-Night-Bright
+  colorscheme slummerville
 endif
