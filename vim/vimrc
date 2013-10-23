@@ -73,6 +73,9 @@ nnoremap <leader>e :e <C-R>=expand('%:h').'/'<CR>
 nnoremap <leader>s :sp <C-R>=expand('%:h').'/'<CR>
 nnoremap <leader>v :vsp <C-R>=expand('%:h').'/'<CR>
 nnoremap <leader>t :tabe <C-R>=expand('%:h').'/'<CR>
+" Quick buffers
+nnoremap <Leader>b :bp<CR>
+nnoremap <Leader>f :bn<CR>
 " Use CTRL to move lines up and down
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
