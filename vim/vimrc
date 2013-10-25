@@ -77,6 +77,7 @@ nnoremap <leader>t :tabe <C-R>=expand('%:h').'/'<CR>
 nnoremap gp :bp<CR>
 nnoremap gn :bn<CR>
 nnoremap gl :ls<CR>:b
+nnoremap gy <C-^>
 " Use CTRL to move lines up and down
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
@@ -95,8 +96,4 @@ nmap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:NERDSpaceDelims = 1
 
-if strftime("%H") < 18
-  colorscheme Tomorrow
-else
-  colorscheme slummerville
-endif
+colorscheme slummerville
