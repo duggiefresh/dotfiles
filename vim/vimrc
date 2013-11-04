@@ -15,7 +15,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle 'mileszs/ack.vim'
-Bundle 'nono/vim-handlebars'
+Bundle 'mustache/vim-mode'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rking/ag.vim'
@@ -35,7 +35,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'vim-ruby/vim-ruby'
 
 filetype plugin indent on
-colors slummerville
+colorscheme slummerville-dark
 set nocompatible
 set t_Co=256
 syntax on
@@ -95,5 +95,3 @@ nnoremap <leader>\ :set cursorcolumn!<CR>
 nmap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:NERDSpaceDelims = 1
-
-colorscheme slummerville
