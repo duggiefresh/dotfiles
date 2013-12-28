@@ -8,7 +8,9 @@ Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'chriskempson/tomorrow-theme', { 'rtp': 'vim/' }
+Bundle 'dockyard/vim-easydir'
 Bundle 'duggiefresh/vim-colors'
+Bundle 'edkolev/tmuxline.vim'
 Bundle 'ervandew/supertab'
 Bundle "garbas/vim-snipmate"
 Bundle 'kchmck/vim-coffee-script'
