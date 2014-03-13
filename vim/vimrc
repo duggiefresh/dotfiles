@@ -70,6 +70,9 @@ inoremap ;a <ESC>
 inoremap ;d <ESC>:update<CR>
 inoremap ;f <C-O>:update<CR>
 nnoremap ;f :update<CR>
+" Use that spacebar!
+inoremap <C-@> <C-O>:update<CR>
+nnoremap <Space> :update<CR>
 " Quick moves to splits and tab
 nnoremap <leader>e :e <C-R>=expand('%:h').'/'<CR>
 nnoremap <leader>s :sp <C-R>=expand('%:h').'/'<CR>
@@ -89,9 +92,6 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 " Toggle highlight
 noremap <leader>h :noh<CR>
-" Normal mode, spacebar saves file
-nnoremap <Space> :update<CR>
-
 " GOTCHA IN MY CROSSHAIRS
 nnoremap <leader>/ :set cursorline!<CR>
 nnoremap <leader>\ :set cursorcolumn!<CR>
