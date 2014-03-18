@@ -101,3 +101,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:NERDSpaceDelims = 1
 
 au BufNewFile,BufRead *.es6 set filetype=javascript
+
+" For Syntastic
+hi SpellBad ctermfg=000 ctermbg=255
+hi SpellCap ctermfg=000 ctermbg=255
