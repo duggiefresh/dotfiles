@@ -3,38 +3,38 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'bling/vim-airline'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'chriskempson/tomorrow-theme', { 'rtp': 'vim/' }
-Bundle 'dockyard/vim-easydir'
-Bundle 'duggiefresh/vim-colors'
-Bundle 'edkolev/tmuxline.vim'
-Bundle 'ervandew/supertab'
-Bundle "garbas/vim-snipmate"
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle 'mileszs/ack.vim'
-Bundle 'mustache/vim-mode'
-Bundle 'pangloss/vim-javascript'
-Bundle 'Raimondi/delimitMate'
-Bundle 'rking/ag.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'skwp/vim-rspec'
-Bundle 'slim-template/vim-slim'
-Bundle 'sunaku/vim-ruby-minitest'
-Bundle "tomtom/tlib_vim"
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-surround'
-Bundle 'vim-ruby/vim-ruby'
+Plugin 'bling/vim-airline'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'chriskempson/tomorrow-theme', { 'rtp': 'vim/' }
+Plugin 'dockyard/vim-easydir'
+Plugin 'duggiefresh/vim-colors'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'ervandew/supertab'
+Plugin 'garbas/vim-snipmate'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'mileszs/ack.vim'
+Plugin 'mustache/vim-mode'
+Plugin 'pangloss/vim-javascript'
+Plugin 'Raimondi/delimitMate'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'skwp/vim-rspec'
+Plugin 'slim-template/vim-slim'
+Plugin 'sunaku/vim-ruby-minitest'
+Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-haml'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-ruby/vim-ruby'
 
 filetype plugin indent on
 colorscheme slummerville-dark
@@ -71,8 +71,8 @@ inoremap ;d <ESC>:update<CR>
 inoremap ;f <C-O>:update<CR>
 nnoremap ;f :update<CR>
 " Use that spacebar!
-inoremap <C-@> <ESC>:update<CR>
-nnoremap <Space> :update<CR>
+" inoremap <C-@> <ESC>:update<CR>
+" nnoremap <Space> :update<CR>
 " Quick moves to splits and tab
 nnoremap <leader>e :e <C-R>=expand('%:h').'/'<CR>
 nnoremap <leader>s :sp <C-R>=expand('%:h').'/'<CR>
