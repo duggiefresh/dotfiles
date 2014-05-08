@@ -1,3 +1,8 @@
+--type-set=html=.haml,.hamlc
+--type-set=css=.sass,.scss
+--type-set=coffee=.coffee
+--type-set=ruby=.gemspec,.rb
+
 --ignore-dir=log
 --ignore-dir=node_modules
 --ignore-dir=tmp
