@@ -3,7 +3,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 Plugin 'bling/vim-airline'
 Plugin 'cakebaker/scss-syntax.vim'
