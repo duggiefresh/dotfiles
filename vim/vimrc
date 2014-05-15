@@ -67,13 +67,6 @@ set pastetoggle=<F7>
 
 let mapleader = ','
 let g:mapleader = ','
-inoremap ;a <ESC>
-inoremap ;d <ESC>:update<CR>
-inoremap ;f <C-O>:update<CR>
-nnoremap ;f :update<CR>
-" Use that spacebar!
-" inoremap <C-@> <ESC>:update<CR>
-" nnoremap <Space> :update<CR>
 " Quick moves to splits and tab
 nnoremap <leader>e :e <C-R>=expand('%:h').'/'<CR>
 nnoremap <leader>s :sp <C-R>=expand('%:h').'/'<CR>
