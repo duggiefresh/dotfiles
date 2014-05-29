@@ -11,6 +11,7 @@ Plugin 'bling/vim-airline'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'chriskempson/tomorrow-theme', { 'rtp': 'vim/' }
 Plugin 'dockyard/vim-easydir'
+Plugin 'dockyard/vim-savebar'
 Plugin 'duggiefresh/vim-colors'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'ervandew/supertab'
