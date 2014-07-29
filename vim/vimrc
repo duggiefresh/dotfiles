@@ -24,6 +24,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'mustache/vim-mode'
 Plugin 'pangloss/vim-javascript'
 Plugin 'Raimondi/delimitMate'
+Plugin 'rizzatti/dash.vim'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
@@ -67,6 +68,11 @@ set laststatus=2 " this is for vim-airline
 set timeout timeoutlen=1000 ttimeoutlen=100
 set backspace=indent,eol,start
 set pastetoggle=<F7>
+
+if has('persistent_undo')
+  set undodir=$HOME/.vim/undo
+  set undofile
+end
 
 let mapleader = ','
 let g:mapleader = ','
