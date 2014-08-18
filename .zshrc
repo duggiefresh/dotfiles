@@ -9,9 +9,9 @@ source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
 export PATH="/Users/dug/.rbenv/shims:/Users/dug/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/usr/local/bin/npm"
-export GOROOT=/opt/golang
+# export GOROOT=/usr/local/go
 export GOPATH=$HOME/.go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 
 eval "$(rbenv init -)"
 export PATH="./bin:./bundler_stubs:./binstubs:$PATH"

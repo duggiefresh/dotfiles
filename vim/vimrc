@@ -74,6 +74,8 @@ if has('persistent_undo')
   set undofile
 end
 
+nnoremap <enter> :echo @%<CR>
+
 let mapleader = ','
 let g:mapleader = ','
 " Quick moves to splits and tab
@@ -113,3 +115,24 @@ if executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''scripts'' --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
 endif
+
+" ------------------------------- "
+" For Go development
+
+" Shows type info
+au FileType go nmap <Leader>i <Plug>(go-info)
+
+" Shows relevant Godoc
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+" `go run`
+au FileType go nmap <leader>r <Plug>(go-run)
+" `go build`
+au FileType go nmap <leader>b <Plug>(go-build)
+" `go test`
+au FileType go nmap <leader>t <Plug>(go-test)
+" Display annotated source code
+au FileType go nmap <leader>c <Plug>(go-coverage)
+" Tabs and spaces!
+au BufNewFile,BufRead *.go setlocal set tabstop=2
