@@ -19,7 +19,8 @@ Plugin 'fatih/vim-go'
 Plugin 'garbas/vim-snipmate'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'lukerandall/haskellmode-vim'
+Plugin 'marcWeber/vim-addon-mw-utils'
 Plugin 'mileszs/ack.vim'
 Plugin 'mustache/vim-mode'
 Plugin 'pangloss/vim-javascript'
@@ -115,6 +116,13 @@ if executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''scripts'' --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
 endif
+
+" ------------------------------- "
+" For Haskell
+
+au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
 
 " ------------------------------- "
 " For Go development
