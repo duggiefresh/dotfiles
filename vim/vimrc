@@ -17,6 +17,7 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'ervandew/supertab'
 Plugin 'fatih/vim-go'
 Plugin 'garbas/vim-snipmate'
+Plugin 'godlygeek/tabular'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
 Plugin 'lukerandall/haskellmode-vim'
@@ -75,10 +76,12 @@ if has('persistent_undo')
   set undofile
 end
 
-nnoremap <enter> :echo @%<CR>
 
 let mapleader = ','
 let g:mapleader = ','
+
+nnoremap <leader>z :Errors<CR>
+nnoremap <leader>m :echo @%<CR>
 " Quick moves to splits and tab
 nnoremap <leader>e :e <C-R>=expand('%:h').'/'<CR>
 nnoremap <leader>s :sp <C-R>=expand('%:h').'/'<CR>
