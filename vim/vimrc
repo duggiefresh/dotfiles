@@ -76,7 +76,6 @@ if has('persistent_undo')
   set undofile
 end
 
-
 let mapleader = ','
 let g:mapleader = ','
 
@@ -104,6 +103,9 @@ noremap <leader>h :noh<CR>
 " GOTCHA IN MY CROSSHAIRS
 nnoremap <leader>/ :set cursorline!<CR>
 nnoremap <leader>\ :set cursorcolumn!<CR>
+
+set wildmenu
+set wildmode=longest:list,full
 
 nmap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 let g:SuperTabDefaultCompletionType = "<c-n>"
