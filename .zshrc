@@ -3,7 +3,7 @@ ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="bira"
 
-plugins=(git rbenv)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
@@ -12,12 +12,15 @@ export PATH="/Users/dug/.rbenv/shims:/Users/dug/.rbenv/bin:/usr/local/bin:/usr/b
 # export GOROOT=/usr/local/go
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 eval "$(rbenv init -)"
 export PATH="./bin:./bundler_stubs:./binstubs:$PATH"
 export EDITOR=vim
 
-# set -o vi
+alias n='nvim'
+alias nodeversion='n'
 
 alias tmn='tmux new -s'
 alias tma='tmux attach -t'
@@ -31,6 +34,9 @@ alias be='bundle exec'
 alias psg='ps aux | grep'
 
 alias swp='find . -iname ".*.swp"'
+alias killswp='swp | xargs rm'
+
+alias nombom='npm cache clear && bower cache clean && rm -rf node_modules bower_components && npm install && bower install | echo ༼ ºل͟º༼ ºل͟º(  ͡°  ͜ʖ  ͡°)ºل͟º ༽ºل͟º ༽'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
