@@ -44,7 +44,7 @@ Plugin 'vim-ruby/vim-ruby'
 
 call vundle#end()
 filetype plugin indent on
-colorscheme basic
+colorscheme slummerville-dark
 set t_Co=256
 syntax on
 set autoindent
@@ -118,7 +118,7 @@ hi SpellCap ctermfg=000 ctermbg=255
 
 if executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''scripts'' --ignore ''.git'' --ignore ''vendor'' --ignore ''.DS_Store'' --ignore ''node_modules'' --ignore ''tmp'' --hidden -g ""'
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''scripts'' --ignore ''.git'' --ignore ''vendor'' --ignore ''.DS_Store'' --ignore ''node_modules'' --ignore ''bower_components'' --ignore ''tmp'' --hidden -g ""'
 endif
 
 " ------------------------------- "
