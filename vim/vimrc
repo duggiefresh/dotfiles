@@ -15,7 +15,6 @@ Plugin 'duggiefresh/vim-colors'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'ervandew/supertab'
-Plugin 'fatih/vim-go'
 Plugin 'garbas/vim-snipmate'
 Plugin 'godlygeek/tabular'
 Plugin 'junegunn/vader.vim'
@@ -25,7 +24,7 @@ Plugin 'marcWeber/vim-addon-mw-utils'
 Plugin 'mileszs/ack.vim'
 Plugin 'mustache/vim-mode'
 Plugin 'othree/yajs.vim'
-" Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 Plugin 'raimondi/delimitMate'
 Plugin 'rizzatti/dash.vim'
 Plugin 'rking/ag.vim'
@@ -127,24 +126,3 @@ endif
 au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
-
-" ------------------------------- "
-" For Go development
-
-" Shows type info
-au FileType go nmap <Leader>i <Plug>(go-info)
-
-" Shows relevant Godoc
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-
-" `go run`
-au FileType go nmap <leader>r <Plug>(go-run)
-" `go build`
-au FileType go nmap <leader>b <Plug>(go-build)
-" `go test`
-au FileType go nmap <leader>t <Plug>(go-test)
-" Display annotated source code
-au FileType go nmap <leader>c <Plug>(go-coverage)
-" Tabs and spaces!
-au BufNewFile,BufRead *.go setlocal set tabstop=2
