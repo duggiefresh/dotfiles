@@ -102,6 +102,10 @@
 ;;; Evil leader
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
+;;; Projectile
+(evil-leader/set-key
+  "f" 'projectile-find-file
+  "d" 'projectile-find-dir)
 
 ;;; Interactively Do Things
 (setq ido-enable-flex-matching t)
