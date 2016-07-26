@@ -35,6 +35,10 @@
 (use-package evil-leader
   :ensure t)
 
+(use-package evil-surround
+  :ensure t)
+(global-evil-surround-mode 1)
+
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
@@ -43,6 +47,9 @@
   :ensure t)
 (require 'helm)
 (require 'helm-config)
+
+(use-package helm-ag
+  :ensure t)
 
 (use-package helm-projectile
   :ensure t)
@@ -76,6 +83,7 @@
 (global-set-key (kbd "M-X") 'helm-M-x)
 (setq helm-M-x-fuzzy-match t) ;;; Helm fuzzy matching
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x b") 'helm-mini)
 
 (define-key helm-map (kbd "<tab>")
   'helm-execute-persistent-action) ; rebind tab to run persistent action
@@ -91,7 +99,9 @@
       helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
       helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t)
+      helm-ff-file-name-history-use-recentf t
+      helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match t)
 
 (helm-mode 1)
 
@@ -102,38 +112,37 @@
 ;;; Evil leader
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
-;;; Projectile
 (evil-leader/set-key
+  "a" 'helm-ag
+  "d" 'projectile-find-dir
   "f" 'projectile-find-file
-  "d" 'projectile-find-dir)
+  "g" 'magit-status)
 
-;;; Interactively Do Things
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
-
-;;; Line numbers
-(global-linum-mode 1)
+;;; Magit
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;;; Setup `ibuffer`
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-
-;;; Turn off the tool bar and menu bar
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-
-;;; Turn off jshint
-(setq-default flycheck-disabled-checkers '(javascript-jshint))
 
 ;;; Smex
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
+;;; JS setup
+(setq-default indent-tabs-mode nil)
+(setq js-indent-level 2)
+;;; Turn off jshint
+(setq-default flycheck-disabled-checkers '(javascript-jshint))
+
+;;; Line numbers
+(global-linum-mode 1)
+
 ;;; Deal with trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(setq-default indent-tabs-mode nil)
-(setq js-indent-level 2)
+;;; Turn off the GUI's tool bar and menu bar
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 (provide 'init.el)
 ;;; init.el ends here
