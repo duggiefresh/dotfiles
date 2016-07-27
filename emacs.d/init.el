@@ -35,6 +35,10 @@
 (use-package evil-leader
   :ensure t)
 
+(use-package evil-matchit
+  :ensure t)
+(global-evil-matchit-mode 1)
+
 (use-package evil-surround
   :ensure t)
 (global-evil-surround-mode 1)
@@ -106,6 +110,7 @@
 (helm-mode 1)
 
 (projectile-global-mode)
+(setq projectile-switch-project-action 'projectile-dired)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 
@@ -113,10 +118,14 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
+  "<SPC>" 'save-buffer
   "a" 'helm-ag
   "d" 'projectile-find-dir
   "f" 'projectile-find-file
-  "g" 'magit-status)
+  "g" 'magit-status
+  "p" 'helm-projectile-switch-project
+  "s" 'split-window-horizontally
+  "v" 'split-window-vertically)
 
 ;;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
