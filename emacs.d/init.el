@@ -137,6 +137,9 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
+;;; Dired
+(define-key dired-mode-map "c" 'find-file)
+
 ;;; JS setup
 (setq-default indent-tabs-mode nil)
 (setq js-indent-level 2)
