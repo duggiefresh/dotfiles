@@ -71,6 +71,12 @@
 (use-package smex
   :ensure t)
 
+(use-package web-mode
+  :ensure t)
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.hbs?\\'" . web-mode))
+
 (use-package which-key
   :ensure t)
 (which-key-mode)
@@ -152,9 +158,5 @@
 ;;; Deal with trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;;; Turn off the GUI's tool bar and menu bar
+;;; Turn off the GUI's tool bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-
-(provide 'init.el)
-;;; init.el ends here
