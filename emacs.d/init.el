@@ -125,7 +125,7 @@
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
   "<SPC>" 'save-buffer
-  "a" 'helm-ag
+  "a" 'helm-ag-project-root
   "d" 'projectile-find-dir
   "f" 'projectile-find-file
   "g" 'magit-status
@@ -151,6 +151,10 @@
 (setq js-indent-level 2)
 ;;; Turn off jshint
 (setq-default flycheck-disabled-checkers '(javascript-jshint))
+;;; Elixir setup
+(add-hook 'elixir-mode-hook (lambda ()
+                            (setq evil-shift-width 2)
+                            (setq tab-width 2)))
 
 ;;; Line numbers
 (global-linum-mode 1)
