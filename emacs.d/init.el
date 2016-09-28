@@ -6,7 +6,11 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
+             '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
 (package-initialize)
 
@@ -65,6 +69,9 @@
   :ensure t)
 (global-set-key (kbd "C-x g") 'magit-status)
 
+(use-package neotree
+  :ensure t)
+
 (use-package projectile
   :ensure t)
 
@@ -120,6 +127,7 @@
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 
+(setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes))
 ;;; Evil leader
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
@@ -129,6 +137,8 @@
   "d" 'projectile-find-dir
   "f" 'projectile-find-file
   "g" 'magit-status
+  "nn" 'neotree-toggle'
+  "nf" 'neotree-find'
   "p" 'helm-projectile-switch-project
   "s" 'split-window-horizontally
   "v" 'split-window-vertically)
@@ -156,11 +166,26 @@
                             (setq evil-shift-width 2)
                             (setq tab-width 2)))
 
-;;; Line numbers
+;;; Line numbers, column numbers
 (global-linum-mode 1)
+(column-number-mode 1)
 
 ;;; Deal with trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;; Turn off the GUI's tool bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (neotree which-key web-mode use-package spaceline smex magit js2-mode helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-matchit evil-leader alchemist))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
