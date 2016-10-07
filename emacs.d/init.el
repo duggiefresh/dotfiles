@@ -155,6 +155,8 @@
 
 ;;; Dired
 (define-key dired-mode-map "c" 'find-file)
+(evil-define-key 'normal dired-mode-map "n" 'evil-search-next)
+(evil-define-key 'normal dired-mode-map "N" 'evil-search-previous)
 
 ;;; JS setup
 (setq-default indent-tabs-mode nil)
@@ -176,6 +178,14 @@
 ;;; Turn off the GUI's tool bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (custom-set-variables
+
+ ;;;
+(cond
+ ((executable-find "aspell")
+  (setq ispell-program-name "aspell")
+  ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
+
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
