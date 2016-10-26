@@ -177,7 +177,9 @@
 
 ;;; Turn off the GUI's tool bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(custom-set-variables
+
+;;; Undo windows
+(winner-mode 1)
 
  ;;;
 (cond
@@ -190,6 +192,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+(custom-set-variables
  '(package-selected-packages
    (quote
     (neotree which-key web-mode use-package spaceline smex magit js2-mode helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-matchit evil-leader alchemist))))
@@ -198,4 +201,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+)
