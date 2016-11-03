@@ -168,6 +168,9 @@
                             (setq evil-shift-width 2)
                             (setq tab-width 2)))
 
+;;; HTML/HBS
+(setq sgml-basic-offset 4)
+
 ;;; Line numbers, column numbers
 (global-linum-mode 1)
 (column-number-mode 1)
@@ -180,6 +183,9 @@
 
 ;;; Undo windows
 (winner-mode 1)
+
+;;; SMELL YA LATER LOCKFILES
+(setq create-lockfiles nil)
 
  ;;;
 (cond

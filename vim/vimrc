@@ -38,7 +38,7 @@ Plug 'vim-ruby/vim-ruby'
 call plug#end()
 
 set background=dark
-colorscheme solarized
+colorscheme default
 set t_Co=256
 set autoindent
 set expandtab
