@@ -83,6 +83,7 @@
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.hbs?\\'" . web-mode))
+(setq web-mode-markup-indent-offset 2)
 
 (use-package which-key
   :ensure t)
@@ -167,9 +168,6 @@
 (add-hook 'elixir-mode-hook (lambda ()
                             (setq evil-shift-width 2)
                             (setq tab-width 2)))
-
-;;; HTML/HBS
-(setq sgml-basic-offset 4)
 
 ;;; Line numbers, column numbers
 (global-linum-mode 1)
