@@ -168,6 +168,9 @@
                             (setq evil-shift-width 2)
                             (setq tab-width 2)))
 
+;;; HTML/HBS
+(setq sgml-basic-offset 4)
+
 ;;; Line numbers, column numbers
 (global-linum-mode 1)
 (column-number-mode 1)
@@ -178,6 +181,9 @@
 ;;; Turn off the GUI's tool bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (custom-set-variables
+
+;;; SMELL YA LATER LOCKFILES
+(setq create-lockfiles nil)
 
  ;;;
 (cond
