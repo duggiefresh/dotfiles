@@ -19,10 +19,19 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t)
+
 (use-package company
   :ensure t
   :defer t)
 (add-hook 'after-init-hook 'global-company-mode)
+(setq company-dabbrev-downcase nil)
+
+(use-package drag-stuff
+  :ensure t)
+(drag-stuff-global-mode 1)
+(drag-stuff-define-keys)
 
 (use-package elixir-mode
   :ensure t)
@@ -42,6 +51,10 @@
 (use-package evil-matchit
   :ensure t)
 (global-evil-matchit-mode 1)
+
+(use-package evil-nerd-commenter
+  :ensure t)
+(evilnc-default-hotkeys)
 
 (use-package evil-surround
   :ensure t)
@@ -67,7 +80,6 @@
 
 (use-package magit
   :ensure t)
-(global-set-key (kbd "C-x g") 'magit-status)
 
 (use-package neotree
   :ensure t)
@@ -88,6 +100,9 @@
 (use-package which-key
   :ensure t)
 (which-key-mode)
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
@@ -135,14 +150,22 @@
 (evil-leader/set-key
   "<SPC>" 'save-buffer
   "a" 'helm-ag-project-root
-  "d" 'projectile-find-dir
-  "f" 'projectile-find-file
+  "b" 'helm-mini
+  "c" 'evilnc-comment-or-uncomment-lines
+  "d" 'dired
+  "fd" 'projectile-find-dir
+  "ff" 'projectile-find-file
   "g" 'magit-status
   "nn" 'neotree-toggle'
   "nf" 'neotree-find'
   "p" 'helm-projectile-switch-project
   "s" 'split-window-horizontally
   "v" 'split-window-vertically)
+
+;;; Neotree
+(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+(setq neo-theme (if window-system 'ascii 'arrow))
 
 ;;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -158,6 +181,20 @@
 (define-key dired-mode-map "c" 'find-file)
 (evil-define-key 'normal dired-mode-map "n" 'evil-search-next)
 (evil-define-key 'normal dired-mode-map "N" 'evil-search-previous)
+(evil-define-key 'normal dired-mode-map "p" 'dired-up-directory)
+
+(add-hook 'dired-load-hook
+          (lambda ()
+            (load "dired-x")
+            ;; Set dired-x global variables here.  For example:
+            ;; (setq dired-guess-shell-gnutar "gtar")
+            ;; (setq dired-x-hands-off-my-keys nil)
+            ))
+(add-hook 'dired-mode-hook
+          (lambda ()
+            ;; Set dired-x buffer-local variables here.  For example:
+              (dired-omit-mode 1)
+            ))
 
 ;;; JS setup
 (setq-default indent-tabs-mode nil)
@@ -173,11 +210,15 @@
 (global-linum-mode 1)
 (column-number-mode 1)
 
+(setq show-paren-delay 0)
+(show-paren-mode 1)
+
 ;;; Deal with trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;; Turn off the GUI's tool bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(setq-default frame-title-format "%f")
 
 ;;; Undo windows
 (winner-mode 1)
@@ -185,7 +226,16 @@
 ;;; SMELL YA LATER LOCKFILES
 (setq create-lockfiles nil)
 
- ;;;
+;;; Auto reload all files from disk
+(global-auto-revert-mode t)
+
+;; store all backup and autosave files in the tmp dir
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+;;;
 (cond
  ((executable-find "aspell")
   (setq ispell-program-name "aspell")
@@ -197,9 +247,44 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   (vector "#c5c8c6" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#373b41"))
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-day)))
+ '(custom-safe-themes
+   (quote
+    ("bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
+ '(fci-rule-color "#373b41")
  '(package-selected-packages
    (quote
-    (neotree which-key web-mode use-package spaceline smex magit js2-mode helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-matchit evil-leader alchemist))))
+    (evil-nerd-commenter neotree which-key web-mode use-package spaceline smex magit js2-mode helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-matchit evil-leader alchemist)))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#cc6666")
+     (40 . "#de935f")
+     (60 . "#f0c674")
+     (80 . "#b5bd68")
+     (100 . "#8abeb7")
+     (120 . "#81a2be")
+     (140 . "#b294bb")
+     (160 . "#cc6666")
+     (180 . "#de935f")
+     (200 . "#f0c674")
+     (220 . "#b5bd68")
+     (240 . "#8abeb7")
+     (260 . "#81a2be")
+     (280 . "#b294bb")
+     (300 . "#cc6666")
+     (320 . "#de935f")
+     (340 . "#f0c674")
+     (360 . "#b5bd68"))))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
