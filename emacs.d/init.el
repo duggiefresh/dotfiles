@@ -101,9 +101,13 @@
 (use-package web-mode
   :ensure t)
 (require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.scss?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.hbs?\\'" . web-mode))
 (setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
 
 (use-package which-key
   :ensure t)
@@ -265,14 +269,17 @@
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    (vector "#c5c8c6" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#373b41"))
- '(custom-enabled-themes (quote (sanityinc-tomorrow-day)))
+ '(column-number-mode t)
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-eighties)))
  '(custom-safe-themes
    (quote
     ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(fci-rule-color "#373b41")
  '(package-selected-packages
    (quote
-    (evil-nerd-commenter neotree which-key web-mode use-package spaceline smex magit js2-mode helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-matchit evil-leader alchemist)))
+    (evil-nerd-commenter neotree which-key -mode use-package spaceline smex magit js2-mode helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-matchit evil-leader alchemist)))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
