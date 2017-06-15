@@ -256,6 +256,11 @@
   ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
 
+;;; Font
+(when (eq system-type 'darwin)
+  (set-face-attribute 'default nil :family "Source Code Pro")
+  )
+
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
