@@ -12,3 +12,5 @@ vim/bundle/
 /emacs.d/projectile.cache
 /emacs.d/projectile-bookmarks.eld
 /emacs.d/smex-items
+\#*\#
+.\#*
