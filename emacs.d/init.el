@@ -168,8 +168,8 @@
   "b" 'helm-mini
   "c" 'evilnc-comment-or-uncomment-lines
   "d" 'dired
-  "fd" 'projectile-find-dir
-  "ff" 'projectile-find-file
+  "fd" 'helm-projectile-find-dir
+  "ff" 'helm-projectile-find-file
   "g" 'magit-status
   "nn" 'neotree-toggle'
   "nf" 'neotree-find'
