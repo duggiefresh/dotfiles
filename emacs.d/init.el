@@ -14,7 +14,7 @@
 
 (package-initialize)
 
-(menu-bar-mode -1)
+;; (menu-bar-mode -1)
 
 ;;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
@@ -44,7 +44,8 @@
 
 ;;; Evil key mapping
 (setq evil-want-C-u-scroll t
-      evil-want-C-w-in-emacs-state t)
+      evil-want-C-w-in-emacs-state t
+      evil-want-C-i-jump nil)
 (use-package evil)
 (evil-mode 1)
 
@@ -84,6 +85,9 @@
 (use-package js2-mode
   :ensure t)
 
+(use-package rjsx-mode
+  :ensure t)
+
 (use-package magit
   :ensure t)
 
@@ -111,6 +115,7 @@
 (add-to-list 'auto-mode-alist '("\\.scss?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.hbs?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
@@ -162,6 +167,15 @@
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 
+;;; Org mode
+
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cb" 'org-switchb)
+(setq org-log-done 'time)
+(setq org-log-done 'note)
+
 (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes))
 ;;; Evil leader
 (global-evil-leader-mode)
@@ -180,11 +194,11 @@
   "p" 'helm-projectile-switch-project
   "s" 'split-window-horizontally
   "v" 'split-window-vertically)
+(global-set-key (kbd "C-SPC") 'evil-escape)
 
 ;;; Neotree
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
 (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-(global-set-key (kbd "C-<SPC>") 'evil-escape)
 (setq neo-theme (if window-system 'ascii 'arrow))
 
 ;;; Magit
@@ -260,11 +274,6 @@
   ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
 
-;;; Font
-(when (eq system-type 'darwin)
-  (set-face-attribute 'default nil :family "Source Code Pro")
-  )
-
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -284,12 +293,13 @@
  '(custom-safe-themes
    (quote
     ("82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
+ '(default-frame-alist (quote ((nil) (font . "Source Code Pro 14"))))
  '(fci-rule-color "#373b41")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(frame-background-mode (quote light))
  '(package-selected-packages
    (quote
-    (evil-nerd-commenter neotree which-key -mode use-package spaceline smex magit js2-mode helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-matchit evil-leader alchemist)))
+    (rjsx-mode evil-nerd-commenter neotree which-key -mode use-package spaceline smex magit js2-mode helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-matchit evil-leader alchemist)))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(vc-annotate-background nil)
@@ -319,4 +329,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "#2d2d2d" :foreground "#cccccc" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil"))))
  '(web-mode-html-tag-bracket-face ((t (:foreground "gray50")))))
