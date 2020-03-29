@@ -4,13 +4,16 @@ vim/bundle/
 
 # emacs
 */url/cache
+/emacs.d/auto-save-list
+/emacs.d/bookmarks
 /emacs.d/elpa
 /emacs.d/games
-/emacs.d/bookmarks
 /emacs.d/ido.last
-/emacs.d/recentf
-/emacs.d/projectile.cache
 /emacs.d/projectile-bookmarks.eld
+/emacs.d/projectile.cache
+/emacs.d/recentf
 /emacs.d/smex-items
+/emacs.d/transient
+
 \#*\#
 .\#*
