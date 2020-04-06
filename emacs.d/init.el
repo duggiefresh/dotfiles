@@ -27,6 +27,9 @@
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-dabbrev-downcase nil)
 
+(use-package deadgrep
+  :ensure t)
+
 (use-package drag-stuff
   :ensure t)
 (drag-stuff-global-mode 1)
@@ -42,8 +45,18 @@
 (setq evil-want-C-u-scroll t
       evil-want-C-w-in-emacs-state t
       evil-want-C-i-jump nil)
-(use-package evil)
-(evil-mode 1)
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
 (use-package evil-escape
   :ensure t)
@@ -54,6 +67,9 @@
 (use-package evil-matchit
   :ensure t)
 (global-evil-matchit-mode 1)
+
+(use-package evil-magit
+  :ensure t)
 
 (use-package evil-nerd-commenter
   :ensure t)
@@ -185,7 +201,7 @@
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
   "<SPC>" 'save-buffer
-  "a" 'helm-ag-project-root
+  "a" 'deadgrep
   "b" 'helm-mini
   "c" 'evilnc-comment-or-uncomment-lines
   "d" 'dired
@@ -274,6 +290,13 @@
 
 ;;;
 (cond
+ ((string-equal system-type "darwin") ; macOS
+  (when (member "Source Code Pro" (font-family-list))
+    (set-frame-font "Source Code Pro" t t)))
+ ((string-equal system-type "gnu/linux") ; linux
+  (when (member "DejaVu Sans Mono" (font-family-list))
+    (set-frame-font "DejaVu Sans Mono" t t)))
+
  ((executable-find "aspell")
   (setq ispell-program-name "aspell")
   ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
@@ -302,7 +325,7 @@
  '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes
    (quote
-    ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
+    ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
  '(fci-rule-color "#d6d6d6")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(frame-background-mode (quote light))
@@ -330,12 +353,13 @@
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(hl-paren-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
+ '(lsp-ui-doc-border "#93a1a1")
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (which-key web-mode use-package solarized-theme smex rjsx-mode neotree markdown-mode magit helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-nerd-commenter evil-matchit evil-leader evil-escape drag-stuff color-theme-sanityinc-tomorrow alchemist)))
+    (evil-collection which-key web-mode use-package solarized-theme smex rjsx-mode neotree markdown-mode magit helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-nerd-commenter evil-matchit evil-leader evil-escape drag-stuff color-theme-sanityinc-tomorrow alchemist)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
