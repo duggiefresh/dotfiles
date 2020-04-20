@@ -286,6 +286,7 @@
 
 ;;; Auto reload all files from disk
 (global-auto-revert-mode t)
+(add-hook 'dired-mode-hook 'auto-revert-mode)
 
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
