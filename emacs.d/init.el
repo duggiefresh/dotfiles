@@ -109,7 +109,7 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+  :init (setq markdown-command "pandoc"))
 
 (use-package neotree
   :ensure t)
@@ -120,6 +120,7 @@
 (use-package smartparens-config
   :ensure smartparens
   :config (progn (show-smartparens-global-mode t)))
+(require 'smartparens-config)
 
 (use-package smex
   :ensure t)
