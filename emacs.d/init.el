@@ -117,10 +117,8 @@
 (use-package projectile
   :ensure t)
 
-(use-package smartparens-config
-  :ensure smartparens
-  :config (progn (show-smartparens-global-mode t)))
-(require 'smartparens-config)
+(use-package smartparens-config)
+(smartparens-global-mode t)
 
 (use-package smex
   :ensure t)
