@@ -262,6 +262,10 @@
                             (setq evil-shift-width 2)
                             (setq tab-width 2)))
 
+;;; Markdown setup
+(add-hook 'text-mode-hook 'auto-fill-mode)
+(setq-default fill-column 80)
+
 ;;; Line numbers, column numbers
 (global-linum-mode 1)
 (column-number-mode 1)
