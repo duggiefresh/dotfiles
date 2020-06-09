@@ -97,6 +97,15 @@
 (use-package js2-mode
   :ensure t)
 
+(use-package lsp-mode
+  :commands lsp
+  :ensure t
+  :diminish lsp-mode
+  :hook
+  (elixir-mode . lsp)
+  :init
+  (add-to-list 'exec-path "path-to-elixir-ls/release"))
+
 (use-package rjsx-mode
   :ensure t)
 
@@ -117,8 +126,9 @@
 (use-package projectile
   :ensure t)
 
-(use-package smartparens-config)
-(smartparens-global-mode t)
+(use-package smartparens-config
+  :ensure smartparens
+  :config (progn (show-smartparens-global-mode t)))
 
 (use-package smex
   :ensure t)
