@@ -212,6 +212,7 @@
 (global-set-key "\C-cb" 'org-switchb)
 (setq org-log-done 'time)
 (setq org-log-done 'note)
+(add-hook 'org-mode-hook #'toggle-word-wrap)
 
 (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes))
 ;;; Evil leader

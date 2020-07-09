@@ -22,7 +22,7 @@ alias tml='tmux ls'
 alias tmk='tmux kill-session -t'
 alias k='kill -9'
 
-alias gdmb='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
+alias gdmb='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
 
 alias be='bundle exec'
 alias psg='ps aux | grep'
