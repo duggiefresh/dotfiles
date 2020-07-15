@@ -129,7 +129,7 @@
 (use-package smartparens
   :ensure t
   :config
-  (add-hook 'prog-mode-hook #'smartparens-mode))
+  (smartparens-global-mode t))
 
 (use-package smex
   :ensure t)
