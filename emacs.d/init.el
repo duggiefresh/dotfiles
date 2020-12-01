@@ -4,15 +4,15 @@
 
 ;;; Code:
 (require 'package)
-;; (setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")))
+
 (add-to-list 'package-archives
              '("org" . "http://orgmode.org/elpa/"))
-;; (add-to-list 'package-archives
-;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (package-initialize)
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 ;; (menu-bar-mode -1)
 
@@ -20,6 +20,8 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+(use-package exec-path-from-shell)
 
 (use-package company
   :ensure t
@@ -41,6 +43,15 @@
 (require 'eglot)
 (add-hook 'elixir-mode-hook 'eglot-ensure)
 (add-to-list 'eglot-server-programs '(elixir-mode "~/oss/elixir-ls/language_server.sh"))
+
+(use-package eradio
+  :ensure t
+  :init
+  (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
+  (setq eradio-channels '(("soma fm - Groove Salad" . "https://somafm.com/groovesalad130.pls")
+                          ("soma fm - Groove Salad Classic" . "https://somafm.com/gsclassic130.pls")
+                          ("soma fm - Underground 80s" . "https://somafm.com/u80s130.pls")
+                          ("soma fm - Dubstep Beyond" . "https://somafm.com/dubstep130.pls"))))
 
 ;;; Evil key mapping
 (setq evil-want-C-u-scroll t
@@ -117,6 +128,15 @@
 
 (use-package projectile
   :ensure t)
+
+(use-package rustic
+  :hook
+  (rust-mode . lsp-deferred)
+  (rust-mode . company-mode)
+  :custom
+  (rustic-format-on-save t)
+  (rustic-indent-method-chain t))
+(setq rustic-lsp-client 'eglot)
 
 (use-package smartparens
   :ensure t
@@ -369,7 +389,7 @@
  '(nrepl-message-colors
    '("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4"))
  '(package-selected-packages
-   '(zzz-to-char lsp-elixir evil-collection which-key web-mode use-package solarized-theme smex rjsx-mode neotree markdown-mode magit helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-nerd-commenter evil-matchit evil-leader evil-escape drag-stuff color-theme-sanityinc-tomorrow alchemist))
+   '(rustic zzz-to-char lsp-elixir evil-collection which-key web-mode use-package solarized-theme smex rjsx-mode neotree markdown-mode magit helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-nerd-commenter evil-matchit evil-leader evil-escape drag-stuff color-theme-sanityinc-tomorrow alchemist))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
