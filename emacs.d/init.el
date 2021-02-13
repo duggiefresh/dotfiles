@@ -81,9 +81,6 @@
   :ensure t)
 (global-evil-matchit-mode 1)
 
-(use-package evil-magit
-  :ensure t)
-
 (use-package evil-nerd-commenter
   :ensure t)
 (evilnc-default-hotkeys)
@@ -95,6 +92,14 @@
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
+
+(add-to-list 'display-buffer-alist
+             `(,(rx bos "*Flycheck errors*" eos)
+              (display-buffer-reuse-window
+               display-buffer-in-side-window)
+              (side            . bottom)
+              (reusable-frames . visible)
+              (window-height   . 0.33)))
 
 (use-package flycheck-rust
   :ensure t
@@ -145,6 +150,7 @@
   (rustic-indent-method-chain t))
 (setq rustic-lsp-client 'eglot)
 
+
 ;; (custom-set-faces
 ;;   '(rustic-compilation-column ((t (:inherit compilation-column-number))))
 ;;   '(rustic-compilation-line ((t (:foreground "LimeGreen"))))
@@ -172,15 +178,59 @@
   (lambda ()
     (spell-fu-mode)))
 
-(use-package web-mode
+(use-package treemacs
+  :ensure t
+  :defer t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  )
+
+(use-package treemacs-evil
+  :after treemacs evil
   :ensure t)
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.scss?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.hbs?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :ensure t)
+
+;; (use-package treemacs-icons-dired
+;;   :after treemacs dired
+;;   :ensure t
+;;   :config (treemacs-icons-dired-mode))
+
+(use-package treemacs-magit
+  :after treemacs magit
+  :ensure t)
+
+;; (use-package web-mode
+;;   :ensure t)
+;; (require 'web-mode)
+;; (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.scss?\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.hbs?\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+
+(use-package web-mode
+  :ensure t
+  :mode
+         (("\\.css\\'" . web-mode)
+         ("\\.scss\\'" . web-mode)
+         ("\\.js\\'" . web-mode)
+         ("\\.jsx\\'" . web-mode)
+         ("\\.ts\\'" . web-mode)
+         ("\\.tsx\\'" . web-mode)
+         ("\\.eex\\'" . web-mode)
+         ("\\.html\\'" . web-mode)
+         ("\\.hbs\\'" . web-mode)
+         ("\\.json\\'" . web-mode))
+  :commands web-mode
+  :config
+  (setq web-mode-content-types-alist
+    '(("jsx" . "\\.js[x]?\\'")))
+  )
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
@@ -195,6 +245,38 @@
 
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
+
+
+
+;;; Helm
+;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+(global-set-key (kbd "M-X") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t) ;;; Helm fuzzy matching
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x b") 'helm-mini)
+
+(define-key helm-map (kbd "<tab>")
+  'helm-execute-persistent-action) ; rebind tab to run persistent action
+(define-key helm-map (kbd "C-i")
+  'helm-execute-persistent-action) ; make TAB works in terminal
+(define-key helm-map (kbd "C-z")
+  'helm-select-action) ; list actions using C-z
+
+(when (executable-find "curl")
+  (setq helm-google-suggest-use-curl-p t))
+
+(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+      helm-ff-file-name-history-use-recentf t
+      helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match t)
+
 
 ;;; Helm
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
@@ -240,6 +322,7 @@
 (global-set-key "\C-cb" 'org-switchb)
 (setq org-log-done 'time)
 (setq org-log-done 'note)
+(setq org-startup-indented t)
 (add-hook 'org-mode-hook #'toggle-word-wrap)
 
 (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes))
@@ -252,20 +335,22 @@
   "b" 'helm-mini
   "c" 'evilnc-comment-or-uncomment-lines
   "d" 'dired
+  "e" 'flycheck-list-errors
   "fd" 'helm-projectile-find-dir
   "ff" 'helm-projectile-find-file
   "g" 'magit-status
-  "nn" 'neotree-toggle'
-  "nf" 'neotree-find'
+  ;; "nn" 'neotree-toggle'
+  ;; "nf" 'neotree-find'
   "p" 'helm-projectile-switch-project
   "s" 'split-window-horizontally
+  "x" 'smex
   "v" 'split-window-vertically)
 (global-set-key (kbd "C-SPC") 'evil-escape)
 
 ;;; Neotree
-(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-(setq neo-theme (if window-system 'ascii 'arrow))
+;; (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+;; (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+;; (setq neo-theme (if window-system 'ascii 'arrow))
 
 ;;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -354,6 +439,14 @@
   ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
 
+(defun elixir/find-mix-project (dir)
+  "Try to locate a Elixir project root by 'mix.exs' above DIR."
+  (let ((mix_root (locate-dominating-file dir "mix.exs")))
+    (message "Found Elixir project root in '%s' starting from '%s'" mix_root dir)
+    (if (stringp mix_root) `(transient . ,mix_root) nil)))
+
+(add-hook 'project-find-functions 'elixir/find-mix-project nil nil)
+
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -406,9 +499,18 @@
  '(nrepl-message-colors
    '("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4"))
  '(package-selected-packages
-   '(eradio evil-magit nord-theme rustic zzz-to-char lsp-elixir evil-collection which-key web-mode use-package solarized-theme smex rjsx-mode neotree markdown-mode magit helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-nerd-commenter evil-matchit evil-leader evil-escape drag-stuff color-theme-sanityinc-tomorrow alchemist))
+   '(treemacs eradio evil-magit nord-theme rustic zzz-to-char lsp-elixir evil-collection which-key web-mode use-package solarized-theme smex rjsx-mode neotree markdown-mode magit helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-nerd-commenter evil-matchit evil-leader evil-escape drag-stuff color-theme-sanityinc-tomorrow alchemist))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
+ '(rustic-ansi-faces
+   ["black"
+    "red3"
+    "green3"
+    "yellow3"
+    "DodgerBlue"
+    "magenta3"
+    "cyan3"
+    "white"])
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
