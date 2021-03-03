@@ -135,9 +135,6 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "pandoc"))
 
-(use-package neotree
-  :ensure t)
-
 (use-package projectile
   :ensure t)
 
@@ -175,6 +172,9 @@
   :init
   (with-eval-after-load 'winum
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :config
+  (progn
+    (setq treemacs-no-png-images t))
   )
 
 (use-package treemacs-evil
@@ -184,11 +184,6 @@
 (use-package treemacs-projectile
   :after treemacs projectile
   :ensure t)
-
-;; (use-package treemacs-icons-dired
-;;   :after treemacs dired
-;;   :ensure t
-;;   :config (treemacs-icons-dired-mode))
 
 (use-package treemacs-magit
   :after treemacs magit
@@ -321,18 +316,12 @@
   "fd" 'helm-projectile-find-dir
   "ff" 'helm-projectile-find-file
   "g" 'magit-status
-  ;; "nn" 'neotree-toggle'
-  ;; "nf" 'neotree-find'
+  "n" 'treemacs
   "p" 'helm-projectile-switch-project
   "s" 'split-window-horizontally
   "x" 'smex
   "v" 'split-window-vertically)
 (global-set-key (kbd "C-SPC") 'evil-escape)
-
-;;; Neotree
-;; (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-;; (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-;; (setq neo-theme (if window-system 'ascii 'arrow))
 
 ;;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -481,18 +470,11 @@
  '(nrepl-message-colors
    '("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4"))
  '(package-selected-packages
-   '(treemacs eradio evil-magit nord-theme rustic zzz-to-char lsp-elixir evil-collection which-key web-mode use-package solarized-theme smex rjsx-mode neotree markdown-mode magit helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-nerd-commenter evil-matchit evil-leader evil-escape drag-stuff color-theme-sanityinc-tomorrow alchemist))
+   '(treemacs eradio evil-magit nord-theme rustic zzz-to-char lsp-elixir evil-collection which-key web-mode use-package solarized-theme smex rjsx-mode markdown-mode magit helm-projectile helm-ag flycheck exec-path-from-shell evil-surround evil-nerd-commenter evil-matchit evil-leader evil-escape drag-stuff color-theme-sanityinc-tomorrow alchemist))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(rustic-ansi-faces
-   ["black"
-    "red3"
-    "green3"
-    "yellow3"
-    "DodgerBlue"
-    "magenta3"
-    "cyan3"
-    "white"])
+   ["black" "red3" "green3" "yellow3" "DodgerBlue" "magenta3" "cyan3" "white"])
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
