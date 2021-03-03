@@ -150,15 +150,6 @@
   (rustic-indent-method-chain t))
 (setq rustic-lsp-client 'eglot)
 
-
-;; (custom-set-faces
-;;   '(rustic-compilation-column ((t (:inherit compilation-column-number))))
-;;   '(rustic-compilation-line ((t (:foreground "LimeGreen"))))
-;;   '(rustic-compilation-error ((t (:foreground "LimeGreen"))))
-;;   '(rustic-compilation-warning ((t (:foreground "LimeGreen"))))
-;;   '(rustic-compilation-info ((t (:foreground "LimeGreen"))))
-;;   )
-
 (use-package smartparens
   :ensure t
   :config
