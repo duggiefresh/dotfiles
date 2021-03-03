@@ -203,29 +203,20 @@
   :after treemacs magit
   :ensure t)
 
-;; (use-package web-mode
-;;   :ensure t)
-;; (require 'web-mode)
-;; (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
-;; (add-to-list 'auto-mode-alist '("\\.scss?\\'" . web-mode))
-;; (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-;; (add-to-list 'auto-mode-alist '("\\.hbs?\\'" . web-mode))
-;; (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
-;; (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
-
 (use-package web-mode
   :ensure t
   :mode
          (("\\.css\\'" . web-mode)
-         ("\\.scss\\'" . web-mode)
-         ("\\.js\\'" . web-mode)
-         ("\\.jsx\\'" . web-mode)
-         ("\\.ts\\'" . web-mode)
-         ("\\.tsx\\'" . web-mode)
          ("\\.eex\\'" . web-mode)
-         ("\\.html\\'" . web-mode)
          ("\\.hbs\\'" . web-mode)
-         ("\\.json\\'" . web-mode))
+         ("\\.html\\'" . web-mode)
+         ("\\.js\\'" . web-mode)
+         ("\\.json\\'" . web-mode)
+         ("\\.jsx\\'" . web-mode)
+         ("\\.scss\\'" . web-mode)
+         ("\\.svelte\\'" . web-mode)
+         ("\\.ts\\'" . web-mode)
+         ("\\.tsx\\'" . web-mode))
   :commands web-mode
   :config
   (setq web-mode-content-types-alist
