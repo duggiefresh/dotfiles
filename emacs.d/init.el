@@ -192,25 +192,28 @@
 (use-package web-mode
   :ensure t
   :mode
-         (("\\.css\\'" . web-mode)
-         ("\\.eex\\'" . web-mode)
-         ("\\.hbs\\'" . web-mode)
-         ("\\.html\\'" . web-mode)
-         ("\\.js\\'" . web-mode)
-         ("\\.json\\'" . web-mode)
-         ("\\.jsx\\'" . web-mode)
-         ("\\.scss\\'" . web-mode)
-         ("\\.svelte\\'" . web-mode)
-         ("\\.ts\\'" . web-mode)
-         ("\\.tsx\\'" . web-mode))
+  (("\\.css\\'" . web-mode)
+   ("\\.eex\\'" . web-mode)
+   ("\\.hbs\\'" . web-mode)
+   ("\\.html\\'" . web-mode)
+   ("\\.js\\'" . web-mode)
+   ("\\.json\\'" . web-mode)
+   ("\\.jsx\\'" . web-mode)
+   ("\\.scss\\'" . web-mode)
+   ("\\.svelte\\'" . web-mode)
+   ("\\.ts\\'" . web-mode)
+   ("\\.tsx\\'" . web-mode))
   :commands web-mode
   :config
   (setq web-mode-content-types-alist
-    '(("jsx" . "\\.js[x]?\\'")))
+        '(("jsx" . "\\.js[x]?\\'")))
+  :custom
+  (web-mode-markup-indent-offset 2)
+  (web-mode-css-indent-offset 2)
+  (web-mode-code-indent-offset 2)
+  (web-mode-script-padding 2)
+  (web-mode-style-padding 2)
   )
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
-(setq web-mode-code-indent-offset 2)
 ;; (setq web-mode-html-tag-face nil :foreground "gray50")
 
 (use-package which-key
