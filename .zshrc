@@ -7,11 +7,13 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH="/Users/dug/.rbenv/shims:/Users/dug/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/usr/local/bin/npm"
+export PATH="/Users/dug/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/usr/local/bin/npm"
 
 eval "$(rbenv init -)"
 export PATH="./bin:./bundler_stubs:./binstubs:$PATH"
 export EDITOR=vim
+
+. $(brew --prefix asdf)/asdf.sh
 
 alias n='nvim'
 alias nodeversion='n'
@@ -22,7 +24,7 @@ alias tml='tmux ls'
 alias tmk='tmux kill-session -t'
 alias k='kill -9'
 
-alias gdmb='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
+alias gdmb='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
 alias be='bundle exec'
 alias psg='ps aux | grep'
