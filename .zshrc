@@ -7,16 +7,12 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH="/Users/dug/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/usr/local/bin/npm"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/usr/local/bin/npm"
 
-eval "$(rbenv init -)"
 export PATH="./bin:./bundler_stubs:./binstubs:$PATH"
 export EDITOR=vim
 
 . $(brew --prefix asdf)/asdf.sh
-
-alias n='nvim'
-alias nodeversion='n'
 
 alias tmn='tmux new -s'
 alias tma='tmux attach -t'
