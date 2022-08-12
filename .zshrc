@@ -12,7 +12,13 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/loca
 export PATH="./bin:./bundler_stubs:./binstubs:$PATH"
 export EDITOR=vim
 
-. $(brew --prefix asdf)/asdf.sh
+. $HOME/.asdf/asdf.sh
+# . $(brew --prefix asdf)/asdf.sh
+
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
 
 alias tmn='tmux new -s'
 alias tma='tmux attach -t'
