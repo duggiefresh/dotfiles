@@ -41,6 +41,7 @@
   :ensure t)
 
 (require 'eglot)
+(add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'elixir-mode-hook 'eglot-ensure)
 (add-to-list 'eglot-server-programs '(elixir-mode "~/oss/elixir-ls/language_server.sh"))
 
@@ -111,8 +112,8 @@
   :ensure t)
 (require 'helm)
 
-(use-package helm-ag
-  :ensure t)
+;; (use-package helm-ag
+;; :ensure t)
 
 (use-package helm-projectile
   :ensure t)
@@ -122,6 +123,31 @@
 
 (use-package rjsx-mode
   :ensure t)
+
+(use-package ligature
+  :config
+  ;; Enable the "www" ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; Enable all Cascadia Code ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                       "\\\\" "://"))
+  ;; Enables ligature checks globally in all buffers.  You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
 
 (use-package magit
   :ensure t)
@@ -161,9 +187,9 @@
 ;;     (setq spell-fu-faces-exclude '(org-meta-line org-link org-code))
 ;;     (spell-fu-mode)))
 
-(add-hook 'markdown-mode-hook
-  (lambda ()
-    (spell-fu-mode)))
+;; (add-hook 'markdown-mode-hook
+;; (lambda ()
+;;    (spell-fu-mode)))
 
 (use-package treemacs
   :ensure t
@@ -401,8 +427,8 @@
 ;;;
 (cond
  ((string-equal system-type "darwin") ; macOS
-  (when (member "Source Code Pro" (font-family-list))
-    (set-frame-font "Source Code Pro-14" t t)))
+  (when (member "Cascadia Code" (font-family-list))
+    (set-frame-font "Cascadia Code-14" t t)))
  ((string-equal system-type "gnu/linux") ; linux
   (when (member "DejaVu Sans Mono" (font-family-list))
     (set-frame-font "DejaVu Sans Mono" t t)))
@@ -433,9 +459,9 @@
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
-   (vector "#ffffff" "#c82829" "#718c00" "#eab700" "#4271ae" "#8959a8" "#3e999f"
-           "#4d4d4c"))
+   ["#2f2f2e" "#ffb4ac" "#8ac6f2" "#e5c06d" "#a4b5e6" "#e5786d" "#7ec98f" "#74736f"])
  '(beacon-color "#c82829")
+ '(column-number-mode t)
  '(compilation-message-face 'default)
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
@@ -443,7 +469,14 @@
  '(cua-read-only-cursor-color "#859900")
  '(custom-enabled-themes '(sanityinc-tomorrow-night))
  '(custom-safe-themes
-   '("6fc9e40b4375d9d8d0d9521505849ab4d04220ed470db0b78b700230da0a86c1"
+   '("04aa1c3ccaee1cc2b93b246c6fbcd597f7e6832a97aaeac7e5891e6863236f9f"
+     "36d4b9573ed57b3c53261cb517eef2353058b7cf95b957f691f5ad066933ae84"
+     "51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773"
+     "b11edd2e0f97a0a7d5e66a9b82091b44431401ac394478beb44389cf54e6db28"
+     "d89e15a34261019eec9072575d8a924185c27d3da64899905f8548cbd9491a36"
+     "833ddce3314a4e28411edf3c6efde468f6f2616fc31e17a62587d6a9255f4633"
+     "7fea145741b3ca719ae45e6533ad1f49b2a43bf199d9afaee5b6135fd9e6f9b8"
+     "6fc9e40b4375d9d8d0d9521505849ab4d04220ed470db0b78b700230da0a86c1"
      "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328"
      "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5"
      "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8"
@@ -460,6 +493,7 @@
  '(fci-rule-color "#d6d6d6")
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(frame-background-mode 'light)
+ '(global-display-line-numbers-mode t)
  '(helm-completion-style 'emacs)
  '(helm-minibuffer-history-key "M-p")
  '(highlight-changes-colors '("#d33682" "#6c71c4"))
@@ -482,7 +516,15 @@
  '(nrepl-message-colors
    '("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198"
      "#d33682" "#6c71c4"))
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(color-theme-sanityinc-tomorrow company deadgrep drag-stuff elixir-mode eradio
+                                    evil-collection evil-escape evil-leader
+                                    evil-matchit evil-nerd-commenter
+                                    evil-surround exec-path-from-shell
+                                    flycheck-rust helm-projectile ligature
+                                    markdown-mode rjsx-mode smartparens smex
+                                    solarized-theme treemacs-evil treemacs-magit
+                                    treemacs-projectile web-mode))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(rustic-ansi-faces
@@ -490,6 +532,7 @@
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
+ '(tool-bar-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map
@@ -513,6 +556,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Cascadia Code" :foundry "nil" :slant normal :weight regular :height 140 :width normal))))
  '(custom-comment-tag ((t (:foreground "systemBlueColor"))))
  '(custom-variable-obsolete ((t (:foreground "systemBlueColor"))))
  '(epa-string ((t (:foreground "systemBlueColor"))))
