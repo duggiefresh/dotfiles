@@ -41,8 +41,14 @@
   :ensure t)
 
 (require 'eglot)
+(with-eval-after-load 'eglot
+ (add-to-list 'eglot-server-programs '((ruby-mode ruby-ts-mode) "ruby-lsp")))
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'elixir-mode-hook 'eglot-ensure)
+(add-hook 'js-mode-hook 'eglot-ensure)
+(add-hook 'typescript-mode-hook 'eglot-ensure)
+(add-hook 'python-mode-hook 'eglot-ensure)
+(add-hook 'ruby-mode-hook 'eglot-ensure)
 (add-to-list 'eglot-server-programs '(elixir-mode "~/oss/elixir-ls/language_server.sh"))
 
 (use-package eradio
@@ -70,7 +76,8 @@
   :after evil
   :ensure t
   :config
-  (evil-collection-init))
+  :custom (evil-collection-setup-minibuffer t)
+  :init (evil-collection-init))
 
 (use-package evil-escape
   :ensure t)
@@ -219,6 +226,7 @@
   :mode
   (("\\.css\\'" . web-mode)
    ("\\.eex\\'" . web-mode)
+   ("\\.erb\\'" . web-mode)
    ("\\.hbs\\'" . web-mode)
    ("\\.html\\'" . web-mode)
    ("\\.js\\'" . web-mode)
@@ -244,6 +252,10 @@
 (use-package which-key
   :ensure t)
 (which-key-mode)
+
+(use-package yaml-mode
+  :ensure t)
+
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -341,11 +353,10 @@
   "c" 'evilnc-comment-or-uncomment-lines
   "d" 'dired
   "e" 'flycheck-list-errors
-  "fd" 'helm-projectile-find-dir
-  "ff" 'helm-projectile-find-file
   "g" 'magit-status
   "n" 'treemacs
-  "p" 'helm-projectile-switch-project
+  "p" 'projectile-command-map
+  "pp" 'helm-projectile-switch-project
   "s" 'split-window-horizontally
   "x" 'smex
   "v" 'split-window-vertically)
@@ -459,7 +470,7 @@
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
-   ["#2f2f2e" "#ffb4ac" "#8ac6f2" "#e5c06d" "#a4b5e6" "#e5786d" "#7ec98f" "#74736f"])
+   ["#252525" "#ed4a46" "#70b433" "#dbb32d" "#368aeb" "#eb6eb7" "#3fc5b7" "#181818"])
  '(beacon-color "#c82829")
  '(column-number-mode t)
  '(compilation-message-face 'default)
@@ -469,7 +480,9 @@
  '(cua-read-only-cursor-color "#859900")
  '(custom-enabled-themes '(sanityinc-tomorrow-night))
  '(custom-safe-themes
-   '("04aa1c3ccaee1cc2b93b246c6fbcd597f7e6832a97aaeac7e5891e6863236f9f"
+   '("830877f4aab227556548dc0a28bf395d0abe0e3a0ab95455731c9ea5ab5fe4e1"
+     "6bdc4e5f585bb4a500ea38f563ecf126570b9ab3be0598bdf607034bb07a8875"
+     "04aa1c3ccaee1cc2b93b246c6fbcd597f7e6832a97aaeac7e5891e6863236f9f"
      "36d4b9573ed57b3c53261cb517eef2353058b7cf95b957f691f5ad066933ae84"
      "51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773"
      "b11edd2e0f97a0a7d5e66a9b82091b44431401ac394478beb44389cf54e6db28"
@@ -524,7 +537,7 @@
                                     flycheck-rust helm-projectile ligature
                                     markdown-mode rjsx-mode smartparens smex
                                     solarized-theme treemacs-evil treemacs-magit
-                                    treemacs-projectile web-mode))
+                                    treemacs-projectile web-mode yaml-mode))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(rustic-ansi-faces
@@ -556,7 +569,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Cascadia Code" :foundry "nil" :slant normal :weight regular :height 140 :width normal))))
  '(custom-comment-tag ((t (:foreground "systemBlueColor"))))
  '(custom-variable-obsolete ((t (:foreground "systemBlueColor"))))
  '(epa-string ((t (:foreground "systemBlueColor"))))
