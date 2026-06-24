@@ -32,6 +32,9 @@
 (use-package deadgrep
   :ensure t)
 
+(use-package dockerfile-mode
+  :ensure t)
+
 (use-package drag-stuff
   :ensure t)
 (drag-stuff-global-mode 1)
@@ -69,6 +72,7 @@
   :ensure t
   :init
   (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-redo)
   :config
   (evil-mode 1))
 
@@ -263,38 +267,6 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
-
-
-;;; Helm
-;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-(global-set-key (kbd "C-c h") 'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
-(global-set-key (kbd "M-X") 'helm-M-x)
-(setq helm-M-x-fuzzy-match t) ;;; Helm fuzzy matching
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x b") 'helm-mini)
-
-(define-key helm-map (kbd "<tab>")
-  'helm-execute-persistent-action) ; rebind tab to run persistent action
-(define-key helm-map (kbd "C-i")
-  'helm-execute-persistent-action) ; make TAB works in terminal
-(define-key helm-map (kbd "C-z")
-  'helm-select-action) ; list actions using C-z
-
-(when (executable-find "curl")
-  (setq helm-google-suggest-use-curl-p t))
-
-(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t
-      helm-buffers-fuzzy-matching t
-      helm-recentf-fuzzy-match t)
-
-
 ;;; Helm
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -435,11 +407,21 @@
 
 (setq-default word-wrap t)
 
+;; Indent whole buffer
+(defun indent-whole-buffer ()
+  "Indent the entire buffer without affecting point or mark."
+  (interactive)
+  (save-excursion
+    (save-restriction
+      (indent-region (point-min) (point-max)))))
+
+(global-set-key (kbd "C-c i") 'indent-whole-buffer)
+
 ;;;
 (cond
  ((string-equal system-type "darwin") ; macOS
-  (when (member "Cascadia Code" (font-family-list))
-    (set-frame-font "Cascadia Code-14" t t)))
+  (when (member "Cascadia Mono NF" (font-family-list))
+    (set-frame-font "Cascadia Mono NF-14" t t)))
  ((string-equal system-type "gnu/linux") ; linux
   (when (member "DejaVu Sans Mono" (font-family-list))
     (set-frame-font "DejaVu Sans Mono" t t)))
