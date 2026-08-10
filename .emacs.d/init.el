@@ -1,11 +1,15 @@
 ;;; init.el --- Dug's WIP init.el
 
-;;; Commentary:
+(progn
+  ;; load elpa package system
+  ;; require emacs 24
+  (require 'package)
+  ;; Add MELPA repository.
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-;;; Code:
-(require 'package)
-(setq package-archives '(("melpa" . "http://melpa.org/packages/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")))
+  (when (< emacs-major-version 27) (package-initialize))
+  ;;
+  )
 
 (add-to-list 'package-archives
              '("org" . "http://orgmode.org/elpa/"))
@@ -53,6 +57,10 @@
 (add-hook 'python-mode-hook 'eglot-ensure)
 (add-hook 'ruby-mode-hook 'eglot-ensure)
 (add-to-list 'eglot-server-programs '(elixir-mode "~/oss/elixir-ls/language_server.sh"))
+
+(use-package eglot-typescript-preset
+  :vc (:url "https://github.com/mwolson/eglot-typescript-preset"
+       :main-file "eglot-typescript-preset.el"))
 
 (use-package eradio
   :ensure t
@@ -103,7 +111,14 @@
 
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+
+;;(use-package flycheck-eglot
+  ;;:ensure t
+  ;;:after (flycheck eglot)
+  ;;:config
+  ;;(global-flycheck-eglot-mode 1))
 
 (add-to-list 'display-buffer-alist
              `(,(rx bos "*Flycheck errors*" eos)
@@ -125,6 +140,9 @@
 
 ;; (use-package helm-ag
 ;; :ensure t)
+
+(use-package projectile
+  :ensure t)
 
 (use-package helm-projectile
   :ensure t)
@@ -170,9 +188,6 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "pandoc"))
-
-(use-package projectile
-  :ensure t)
 
 (use-package rustic
   :hook
@@ -244,12 +259,12 @@
   :config
   (setq web-mode-content-types-alist
         '(("jsx" . "\\.js[x]?\\'")))
-  :custom
-  (web-mode-markup-indent-offset 2)
-  (web-mode-css-indent-offset 2)
-  (web-mode-code-indent-offset 2)
-  (web-mode-script-padding 2)
-  (web-mode-style-padding 2)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-indent-style 2)
+  (setq web-mode-script-padding 2)
+  (setq web-mode-style-padding 2)
   )
 ;; (setq web-mode-html-tag-face nil :foreground "gray50")
 
@@ -298,7 +313,7 @@
 
 (helm-mode 1)
 
-(projectile-global-mode)
+(projectile-mode)
 (setq projectile-switch-project-action 'projectile-dired)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
@@ -511,15 +526,7 @@
  '(nrepl-message-colors
    '("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198"
      "#d33682" "#6c71c4"))
- '(package-selected-packages
-   '(color-theme-sanityinc-tomorrow company deadgrep drag-stuff elixir-mode eradio
-                                    evil-collection evil-escape evil-leader
-                                    evil-matchit evil-nerd-commenter
-                                    evil-surround exec-path-from-shell
-                                    flycheck-rust helm-projectile ligature
-                                    markdown-mode rjsx-mode smartparens smex
-                                    solarized-theme treemacs-evil treemacs-magit
-                                    treemacs-projectile web-mode yaml-mode))
+ '(package-selected-packages nil)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(rustic-ansi-faces
