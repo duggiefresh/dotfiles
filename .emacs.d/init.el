@@ -1,22 +1,12 @@
-;;; init.el --- Dug's WIP init.el
+;;; init.el --- Dug's WIP init.el  -*- lexical-binding: t; -*-
 
-(progn
-  ;; load elpa package system
-  ;; require emacs 24
-  (require 'package)
-  ;; Add MELPA repository.
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;;; Code:
 
-  (when (< emacs-major-version 27) (package-initialize))
-  ;;
-  )
-
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives
              '("org" . "http://orgmode.org/elpa/"))
 
 (package-initialize)
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
 
 ;; (menu-bar-mode -1)
 
@@ -25,13 +15,18 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(use-package exec-path-from-shell)
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (use-package company
   :ensure t
   :defer t)
 (add-hook 'after-init-hook 'global-company-mode)
-(setq company-dabbrev-downcase nil)
+(setq-local company-dabbrev-downcase nil)
+(setq company-tooltip-align-annotations t)
 
 (use-package deadgrep
   :ensure t)
@@ -49,18 +44,30 @@
 
 (require 'eglot)
 (with-eval-after-load 'eglot
- (add-to-list 'eglot-server-programs '((ruby-mode ruby-ts-mode) "ruby-lsp")))
+  (add-to-list 'eglot-server-programs
+               '((js-mode js-ts-mode rjsx-mode typescript-ts-mode typescript-mode tsx-ts-mode)
+                         . ("tsc" "--lsp" "--stdio")))
+  (add-to-list 'eglot-server-programs '(ruby-mode . ("ruby-lsp")))
+  (add-to-list 'eglot-server-programs '(elixir-mode . ("~/oss/elixir-ls/language_server.sh"))))
+
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'elixir-mode-hook 'eglot-ensure)
 (add-hook 'js-mode-hook 'eglot-ensure)
+(add-hook 'js-ts-mode-hook 'eglot-ensure)
+(add-hook 'rjsx-mode-hook 'eglot-ensure)
 (add-hook 'typescript-mode-hook 'eglot-ensure)
+(add-hook 'tsx-ts-mode-hook 'eglot-ensure)
+(add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 (add-hook 'python-mode-hook 'eglot-ensure)
 (add-hook 'ruby-mode-hook 'eglot-ensure)
-(add-to-list 'eglot-server-programs '(elixir-mode "~/oss/elixir-ls/language_server.sh"))
 
-(use-package eglot-typescript-preset
-  :vc (:url "https://github.com/mwolson/eglot-typescript-preset"
-       :main-file "eglot-typescript-preset.el"))
+
+(use-package lsp-pyright
+  :ensure t
+  :custom (lsp-pyright-langserver-command "pyright") ;; or basedpyright
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))
 
 (use-package eradio
   :ensure t
@@ -113,12 +120,6 @@
   :ensure t
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
-
-;;(use-package flycheck-eglot
-  ;;:ensure t
-  ;;:after (flycheck eglot)
-  ;;:config
-  ;;(global-flycheck-eglot-mode 1))
 
 (add-to-list 'display-buffer-alist
              `(,(rx bos "*Flycheck errors*" eos)
@@ -248,12 +249,12 @@
    ("\\.erb\\'" . web-mode)
    ("\\.hbs\\'" . web-mode)
    ("\\.html\\'" . web-mode)
-   ("\\.js\\'" . web-mode)
+   ;; ("\\.js\\'" . web-mode)
    ("\\.json\\'" . web-mode)
    ("\\.jsx\\'" . web-mode)
    ("\\.scss\\'" . web-mode)
    ("\\.svelte\\'" . web-mode)
-   ("\\.ts\\'" . web-mode)
+   ;; ("\\.ts\\'" . web-mode)
    ("\\.tsx\\'" . web-mode))
   :commands web-mode
   :config
@@ -274,7 +275,6 @@
 
 (use-package yaml-mode
   :ensure t)
-
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -526,7 +526,14 @@
  '(nrepl-message-colors
    '("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198"
      "#d33682" "#6c71c4"))
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(annalist color-theme-sanityinc-tomorrow company deadgrep dockerfile-mode
+              drag-stuff elixir-mode eradio evil-collection evil-escape
+              evil-leader evil-matchit evil-nerd-commenter evil-surround
+              exec-path-from-shell flycheck-eglot flycheck-rust geben
+              helm-projectile ligature lsp-pyright rjsx-mode smartparens smex
+              solarized-theme treemacs-evil treemacs-magit treemacs-projectile
+              web-mode yaml-mode))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(rustic-ansi-faces
